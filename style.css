@@ -1,0 +1,670 @@
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@300;500;700&family=Outfit:wght@300;500;700&display=swap');
+
+:root {
+    --primary-color: #ff9a9e;
+    --primary-dark: #ff758c;
+    --secondary-color: #fecfef;
+    --bg-color: #fff0f5;
+    --text-color: #5d4d5e;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Use Mali for cute Thai text */
+    font-family: 'Mali', 'Outfit', sans-serif;
+    /* Radial gradient: White in center -> Pink at edges */
+    background: radial-gradient(circle, #ffffff 10%, #ffe6ea 60%, #ff9a9e 100%);
+    min-height: 100vh;
+    color: var(--text-color);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Page Section Management */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    z-index: 10;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 20;
+}
+
+/* --- SECTION 1: GIFT BOX --- */
+.gift-container {
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gift-box {
+    animation: wiggle 2s infinite ease-in-out;
+    margin-bottom: 2rem;
+    transition: transform 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gift-img {
+    margin: auto;
+    width: 250px;
+    /* Default comfortable size for desktop */
+    max-width: 80vw;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    display: block;
+}
+
+.gift-box:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Gift Size */
+@media (max-width: 768px) {
+    .gift-img {
+        width: 180px;
+    }
+}
+
+@media (max-width: 500px) {
+    .gift-img {
+        width: 250px;
+        max-width: 70%;
+    }
+
+    .gift-box {
+        margin-bottom: 0.5rem;
+    }
+
+    .gift-text {
+        font-size: 1rem;
+        padding: 5px 15px;
+    }
+
+    /* Responsive Adjustments */
+    .timer-details-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+    }
+
+    .key-btn {
+        width: 55px;
+        height: 50px;
+    }
+
+    .key-btn span {
+        font-size: 1.4rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .menu-item {
+        padding: 1.5rem;
+    }
+
+    .gallery-grid {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.gift-text {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    margin-top: 10px;
+}
+
+/* --- SECTION 2: PASSCODE --- */
+.passcode-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+    width: 90%;
+}
+
+.passcode-title {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.passcode-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    letter-spacing: 5px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    outline: none;
+    color: var(--primary-dark);
+}
+
+.passcode-input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Heart Keypad Styles */
+.keypad {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    /* Tighter layout */
+}
+
+.key-row {
+    display: flex;
+    gap: 15px;
+    /* Consistent column gap */
+    justify-content: center;
+}
+
+.key-btn {
+    width: 65px;
+    /* Larger touch area */
+    height: 60px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Border Heart (Background) */
+/* Border Heart (Background) */
+.key-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff758c'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    z-index: 0;
+}
+
+/* Inner Heart (Fill) */
+.key-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    z-index: 1;
+}
+
+.key-btn span {
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--primary-dark);
+    font-size: 1.6rem;
+    font-family: 'Mali', sans-serif;
+    font-weight: bold;
+    margin-top: -3px;
+}
+
+.key-btn:active {
+    transform: scale(0.9);
+}
+
+.key-btn:active::before {
+    filter: brightness(0.9);
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-family: 'Mali', sans-serif;
+    /* Cute font for button */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    -webkit-tap-highlight-color: transparent;
+    /* Remove blue highlight */
+    outline: none;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    /* Shrink slightly when tapped */
+    box-shadow: 0 2px 10px rgba(255, 107, 107, 0.2);
+}
+
+/* --- SECTION 3: SURPRISE FLOWERS --- */
+.flower-container {
+    text-align: center;
+}
+
+.flowers {
+    max-width: 300px;
+    width: 100%;
+    animation: bloom 1.5s ease-out;
+}
+
+@keyframes bloom {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- SECTION 4: MAIN MENU --- */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.menu-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.menu-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.menu-label {
+    font-weight: 500;
+}
+
+/* --- CONTENT PAGES --- */
+.content-card {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 2rem;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #ff9a9e;
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Timer Specific */
+.timer-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.time-unit {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.time-val {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Timer New Design */
+.timer-details-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.pink-box {
+    background: #ff9a9e;
+    /* Pink background */
+    border-radius: 10px;
+    padding: 10px 5px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 107, 107, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-val-sm {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.2;
+}
+
+.time-label-sm {
+    font-size: 0.8rem;
+    font-family: 'Mali', sans-serif;
+    margin-top: 2px;
+    opacity: 0.9;
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- GALLERY POLAROID STYLE --- */
+.gallery-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.memory-card {
+    background: white;
+    padding: 15px 15px 60px 15px;
+    /* Polaroid Padding */
+    border-radius: 2px;
+    /* Sharp corners */
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transform-origin: center;
+}
+
+/* Scattered Rotation */
+.memory-card:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+.memory-card:nth-child(even) {
+    transform: rotate(2deg);
+}
+
+.memory-card:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.memory-img-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #f8f8f8;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.memory-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Polaroid Background Colors (Pastel) */
+.card-pink {
+    background: #ffe6ea;
+}
+
+.card-purple {
+    background: #f3e5f5;
+}
+
+.card-blue {
+    background: #e3f2fd;
+}
+
+.memory-caption {
+    font-family: 'Mali', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    color: #555;
+    pointer-events: none;
+}
+
+/* --- VINYL MUSIC PLAYER --- */
+.music-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.music-container:hover {
+    transform: scale(1.1);
+}
+
+.vinyl {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Groove texture lines */
+    background-image:
+        repeating-radial-gradient(#111 0,
+            #111 2px,
+            #222 3px,
+            #222 4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vinyl-center {
+    width: 35%;
+    height: 35%;
+    background: var(--primary-color);
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+/* Playing Animation */
+.vinyl.playing {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Floating Notes */
+.music-note {
+    position: absolute;
+    top: 0;
+    color: var(--primary-dark);
+    font-size: 1.2rem;
+    pointer-events: none;
+    transition: 0.5s;
+    transform: translateY(10px);
+}
+
+.music-container.playing .music-note {
+    animation: floatNote 2s infinite ease-out;
+    opacity: 1 !important;
+}
+
+@keyframes floatNote {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-40px) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+.hidden {
+    display: none !important;
+}

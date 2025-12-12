@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise For You</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- PAGE 1: GIFT BOX -->
+    <div id="page-gift" class="page active">
+        <div class="gift-container" id="gift-box-btn">
+            <div class="gift-box">
+                <!-- ใส่ลิ้งรูปภาพกล่องของขวัญตรง src="..." ได้เลยครับ -->
+                <img src="https://img2.pic.in.th/pic/Pngtreea-drawing-of-pink-gift_23186319.png" class="gift-img"
+                    alt="Gift Box">
+            </div>
+            <div class="gift-text">
+                💗ของขวัญสำหรับวันครบรอบเรา💗
+            </div>
+            <div class="gift-btn">
+                <button id="open-gift-btn" class="btn" style="margin-top: 20px;">เปิดของขวัญ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: PASSCODE -->
+    <div id="page-passcode" class="page">
+        <div class="passcode-container">
+            <h2 class="passcode-title">กรอกรหัสผ่าน</h2>
+            <p style="margin-bottom: 20px; font-size: 0.8rem;">คำใบ้ : รหัสผ่านคือวันครบรอบของเรา</p>
+            <input type="password" id="passcode-input" class="passcode-input" placeholder="******" maxlength="6"
+                readonly>
+            <div id="error-msg" style="color: red; display: none; margin-bottom: 15px;">รหัสผ่านไม่ถูกต้อง !</div>
+
+            <!-- Numeric Keypad -->
+            <div class="keypad">
+                <div class="key-row">
+                    <button class="key-btn" onclick="addDigit('1')"><span>1</span></button>
+                    <button class="key-btn" onclick="addDigit('2')"><span>2</span></button>
+                    <button class="key-btn" onclick="addDigit('3')"><span>3</span></button>
+                </div>
+                <div class="key-row">
+                    <button class="key-btn" onclick="addDigit('4')"><span>4</span></button>
+                    <button class="key-btn" onclick="addDigit('5')"><span>5</span></button>
+                    <button class="key-btn" onclick="addDigit('6')"><span>6</span></button>
+                </div>
+                <div class="key-row">
+                    <button class="key-btn" onclick="addDigit('7')"><span>7</span></button>
+                    <button class="key-btn" onclick="addDigit('8')"><span>8</span></button>
+                    <button class="key-btn" onclick="addDigit('9')"><span>9</span></button>
+                </div>
+                <div class="key-row">
+                    <button class="key-btn" style="visibility: hidden;"><span></span></button>
+                    <button class="key-btn" onclick="addDigit('0')"><span>0</span></button>
+                    <button class="key-btn" onclick="deleteDigit()"><span><i
+                                class="fas fa-backspace"></i></span></button>
+                </div>
+            </div>
+
+            <button class="btn" id="passcode-btn">ยืนยัน</button>
+        </div>
+    </div>
+
+    <!-- PAGE 3: FLOWERS TRANSITION -->
+    <div id="page-flowers" class="page">
+        <div class="flower-container">
+            <img src="https://img5.pic.in.th/file/secure-sv1/canva-bouquet-of-pink-tulips.png" alt="Flower Gift"
+                class="flowers">
+            <h2 style="margin-top: 20px;">นี่คือดอกไม้สำหรับคนเก่งของเค้า💐</h2>
+            <button class="btn" id="receive-flowers-btn" style="margin-top: 20px;">รับดอกไม้ 🌷</button>
+        </div>
+    </div>
+
+    <!-- PAGE 4: MAIN MENU -->
+    <div id="page-menu" class="page">
+        <h2 style="margin-bottom: 30px; font-family: 'Mali', cursive; font-size: 1.5rem;">เมนูพิเศษสำหรับคนพิเศษ</h2>
+        <div class="menu-grid">
+            <div class="menu-item" data-target="timer">
+                <i class="fas fa-clock menu-icon"></i>
+                <span class="menu-label">เราคบกันมานานเท่าไหร่แล้ว</span>
+            </div>
+            <div class="menu-item" data-target="letter">
+                <i class="fas fa-envelope-open-text menu-icon"></i>
+                <span class="menu-label">จดหมายถึงคนพิเศษ</span>
+            </div>
+
+            <div class="menu-item" data-target="gallery">
+                <i class="fas fa-images menu-icon"></i>
+                <span class="menu-label">ความทรงจำ</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT: TIMER -->
+    <div id="page-timer" class="page">
+        <div class="content-card">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+
+            <div class="timer-container" style="text-align: center;">
+                <h3 style="color: #888; margin-bottom: 10px; font-family: 'Mali', sans-serif; font-weight: normal;">
+                    ตั้งแต่วันแรกที่คบกัน</h3>
+                <!-- Central Image -->
+                <div class="timer-img-container"
+                    style="margin: 20px auto; width: 150px; height: 150px; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <img src="https://img2.pic.in.th/pic/IMG_515793e35cffbbd64dab.jpg" alt="Our Photo"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+
+                <!-- Small Counters Grid -->
+                <div class="timer-details-grid">
+                    <div class="time-box pink-box">
+                        <div class="time-val-sm" id="t-days-detail">0</div>
+                        <div class="time-label-sm">วัน</div>
+                    </div>
+                    <div class="time-box pink-box">
+                        <div class="time-val-sm" id="t-hours">0</div>
+                        <div class="time-label-sm">ชั่วโมง</div>
+                    </div>
+                    <div class="time-box pink-box">
+                        <div class="time-val-sm" id="t-minutes">0</div>
+                        <div class="time-label-sm">นาที</div>
+                    </div>
+                    <div class="time-box pink-box">
+                        <div class="time-val-sm" id="t-seconds">0</div>
+                        <div class="time-label-sm">วินาที</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; font-family: 'Mali'; color: var(--primary-dark);">คบกันมา <span
+                        id="t-total-days-footer">0</span> วันแล้ว 💖</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT: LETTER -->
+    <div id="page-letter" class="page">
+        <div class="content-card" style="text-align: center;">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+
+            <!-- Envelope Cover -->
+            <div id="letter-cover">
+                <img src="envelope.png" alt="Envelope"
+                    style="width: 150px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">
+                <h2 style="font-family: 'Mali', cursive; color: var(--primary-dark); margin-bottom: 10px;">Happy
+                    Anniversary</h2>
+                <h3 style="font-family: 'Mali', cursive; color: #888; margin-bottom: 30px; font-weight: normal;">
+                    จดหมายถึงคนพิเศษ</h3>
+                <button class="btn" id="read-letter-btn">เปิดอ่าน 💌</button>
+            </div>
+
+            <!-- Actual Letter Content (Hidden initially) -->
+            <div id="letter-content" class="hidden" style="text-align: left; animation: fadeIn 1s;">
+                <h2 style="text-align: center; margin-bottom: 20px;">Anniversary 6m</h2>
+                <p style="line-height: 1.8; margin-bottom: 1rem;">
+                    To my love [Nan],
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 1rem;">
+                    สุขสันต์วันครบรอบ 6 เดือนนะคะที่รัก สิ่งนี้้อาจจะไม่ได้มีคราคาที่แพง แต่เค้าตั้งใจทำให้ที่รักเลยนะ
+                    วันไหนที่รักเหนื่อยก็บอกเค้านะคะ คนเราไม่จำเป็นต้องเข้มแข็งตลอด เค้าจะคอยอยู่ข้างๆที่รัก
+                    ถ้าที่รักเจอปัญหาเค้าจะเป็นคนที่คอยแก้ปัญหาไปพร้อมที่รักเอง เค้ารักที่รักนะคะ
+                </p>
+                <p style="line-height: 1.8;">
+                    เค้ารักที่รักมากเกินกว่าที่เค้าจะพูดอธิบายออกมาได้
+                </p>
+                <p style="text-align: right; margin-top: 2rem; font-weight: bold;">- [Film]</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT: REASON -->
+    <div id="page-reason" class="page">
+        <div class="content-card">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2>Why I Love You ✨</h2>
+            <ul style="list-style: none; text-align: left; margin-top: 1rem;">
+                <li style="margin-bottom: 10px; padding: 10px; background: var(--bg-color); border-radius: 10px;">
+                    1. The way you smile makes my day.
+                </li>
+                <li style="margin-bottom: 10px; padding: 10px; background: var(--bg-color); border-radius: 10px;">
+                    2. You always know how to cheer me up.
+                </li>
+                <li style="margin-bottom: 10px; padding: 10px; background: var(--bg-color); border-radius: 10px;">
+                    3. You are kind, smart, and beautiful.
+                </li>
+                <li style="margin-bottom: 10px; padding: 10px; background: var(--bg-color); border-radius: 10px;">
+                    4. Being with you just feels right.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT: GALLERY -->
+    <div id="page-gallery" class="page">
+        <div class="content-card">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+            <h2>ความทรงจำของเรา 📸</h2>
+            <div class="gallery-grid">
+                <!-- Memory 1 -->
+                <div class="memory-card card-pink">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG1.jpg" class="memory-img" alt="Memory 1">
+                    </div>
+                    <div class="memory-caption">3/10/2568</div>
+                </div>
+                <!-- Memory 2 -->
+                <div class="memory-card card-purple">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_2.jpg" class="memory-img" alt="Memory 2">
+                    </div>
+                    <div class="memory-caption">3/10/2568</div>
+                </div>
+                <!-- Memory 3 -->
+                <div class="memory-card card-blue">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_3.jpg" class="memory-img" alt="Memory 3">
+                    </div>
+                    <div class="memory-caption">3/10/2568</div>
+                </div>
+                <!-- Memory 4 -->
+                <div class="memory-card card-pink">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_4.jpg" class="memory-img" alt="Memory 4">
+                    </div>
+                    <div class="memory-caption">13/10/2568</div>
+                </div>
+                <!-- Memory 5 -->
+                <div class="memory-card card-purple">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_5.jpg" class="memory-img" alt="Memory 5">
+                    </div>
+                    <div class="memory-caption">14/10/2568</div>
+                </div>
+                <!-- Memory 6 -->
+                <div class="memory-card card-blue">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG6.jpg" class="memory-img" alt="Memory 6">
+                    </div>
+                    <div class="memory-caption">15/10/2568</div>
+                </div>
+                <!-- Memory 7 -->
+                <div class="memory-card card-pink">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG7.jpg" class="memory-img" alt="Memory 7">
+                    </div>
+                    <div class="memory-caption">15/10/2568</div>
+                </div>
+                <!-- Memory 8 -->
+                <div class="memory-card card-purple">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG_432.jpg" class="memory-img" alt="Memory 8">
+                    </div>
+                    <div class="memory-caption">5/11/2568</div>
+                </div>
+                <!-- Memory 9 -->
+                <div class="memory-card card-blue">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG_15.jpg" class="memory-img" alt="Memory 9">
+                    </div>
+                    <div class="memory-caption">5/11/2568</div>
+                </div>
+                <!-- Memory 10 -->
+                <div class="memory-card card-pink">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_4590447ed1abb418fa75.jpg"
+                            class="memory-img" alt="Memory 10">
+                    </div>
+                    <div class="memory-caption">10/11/2568</div>
+                </div>
+                <!-- Memory 11 -->
+                <div class="memory-card card-purple">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG_46320d3f9c0474fef3c3.jpg" class="memory-img"
+                            alt="Memory 11">
+                    </div>
+                    <div class="memory-caption">11/11/2568</div>
+                </div>
+                <!-- Memory 12 -->
+                <div class="memory-card card-blue">
+                    <div class="memory-img-container">
+                        <img src="https://img2.pic.in.th/pic/IMG_52599ceedafbe8616107.jpg" class="memory-img"
+                            alt="Memory 12">
+                    </div>
+                    <div class="memory-caption">27/11/2568</div>
+                </div>
+                <!-- Memory 13 -->
+                <div class="memory-card card-pink">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_519057dc482fcc24c979.jpg"
+                            class="memory-img" alt="Memory 13">
+                    </div>
+                    <div class="memory-caption">27/11/2568</div>
+                </div>
+                <!-- Memory 14 -->
+                <div class="memory-card card-purple">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_51806987146545e5d039.jpg"
+                            class="memory-img" alt="Memory 14">
+                    </div>
+                    <div class="memory-caption">27/11/2568</div>
+                </div>
+                <!-- Memory 15 -->
+                <div class="memory-card card-blue">
+                    <div class="memory-img-container">
+                        <img src="https://img5.pic.in.th/file/secure-sv1/IMG_5466235f892add27db4b.jpg"
+                            class="memory-img" alt="Memory 15">
+                    </div>
+                    <div class="memory-caption">29/11/2568</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vinyl Music Player -->
+    <div class="music-container" id="music-container">
+        <div class="vinyl" id="vinyl">
+            <div class="vinyl-center"></div>
+        </div>
+        <div class="music-note" style="left: 50%; opacity: 0; transition-delay: 0.1s;">🎵</div>
+        <div class="music-note" style="left: 70%; opacity: 0; transition-delay: 0.4s;">♩</div>
+    </div>
+
+    <!-- Background Music (YouTube) -->
+    <div id="youtube-player" style="display:none;"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
