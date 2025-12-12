@@ -665,6 +665,18 @@ h2 {
     }
 }
 
+/* Letter Styles */
+#letter-content p {
+    text-align: center;
+    line-height: 2;
+    margin-bottom: 1.5rem;
+}
+
+#letter-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
 .hidden {
     display: none !important;
 }

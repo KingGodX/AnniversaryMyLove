@@ -96,13 +96,13 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
         height: '0',
         width: '0',
-        videoId: '16-wFAbvQiU',
+        videoId: '-2OgtZxiTGc',
         playerVars: {
-            'autoplay': 0,
+            'autoplay': 1,
             'controls': 0,
             'loop': 1,
-            'playlist': '16-wFAbvQiU',
-            'origin': window.location.origin // Security fix
+            'playlist': '-2OgtZxiTGc',
+            'origin': window.location.origin
         },
         events: {
             'onReady': onPlayerReady
@@ -112,7 +112,16 @@ function onYouTubeIframeAPIReady() {
 
 // 2. Player ready callback
 function onPlayerReady(event) {
-    // Player is ready, but we wait for user interaction to play
+    // Attempt to play immediately (Browser might block this without interaction)
+    event.target.setVolume(100);
+    event.target.playVideo();
+
+    // If successful, update UI
+    if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+        vinyl.classList.add('playing');
+        musicContainer.classList.add('playing');
+        isPlaying = true;
+    }
 }
 
 // 3. Control Logic
