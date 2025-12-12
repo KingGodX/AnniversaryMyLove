@@ -47,10 +47,17 @@ function showPage(pageId) {
 }
 
 // Event Listeners
+// Event Listeners
 document.getElementById('open-gift-btn').addEventListener('click', () => {
     showPage('passcode');
-    // Try to play music on first interaction
-    bgMusic.play().catch(e => console.log("Audio autoplay blocked"));
+    // Play music on first interaction (User allowed)
+    if (player) {
+        player.unMute();
+        player.playVideo();
+        vinyl.classList.add('playing');
+        musicContainer.classList.add('playing');
+        isPlaying = true;
+    }
 });
 
 document.getElementById('passcode-btn').addEventListener('click', () => {
@@ -89,12 +96,13 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
         height: '0',
         width: '0',
-        videoId: '16-wFAbvQiU', // Video ID from user's link
+        videoId: '16-wFAbvQiU',
         playerVars: {
             'autoplay': 0,
             'controls': 0,
             'loop': 1,
-            'playlist': '16-wFAbvQiU' // Required for loop to work
+            'playlist': '16-wFAbvQiU',
+            'origin': window.location.origin // Security fix
         },
         events: {
             'onReady': onPlayerReady
